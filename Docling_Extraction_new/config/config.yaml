@@ -1,0 +1,30 @@
+
+document_processing:
+  pdf_extraction:
+    # Actively used extraction knobs
+    images_scale: 1.0            # Referenced for image DPI scaling
+    table_mode: ACCURATE         # Referenced for table detection mode (ACCURATE|FAST)
+    use_progress_bar: true       # Controls tqdm progress bar in process_pdf_directory
+    do_table_structure: true     # Controls structured table markdown emission
+    generate_page_images: true   # Controls page-level image generation
+    generate_picture_images: true # Controls embedded/picture image extraction
+    # Removed unused keys: force_cpu, use_gpu, output path overrides (internal paths are fixed),
+    # which were not referenced in code. System/max_workers & logs_dir also removed below.
+
+logging:
+  level: INFO
+  format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+  file_rotation:
+    max_bytes: 10485760
+    backup_count: 5
+
+environment:
+  HF_HUB_DISABLE_SYMLINKS: '1'    # Applied to avoid Windows symlink issues
+  CUDA_VISIBLE_DEVICES: ''        # Blank disables GPU implicitly; explicit force_cpu flag removed
+  PYTORCH_ENABLE_MPS_FALLBACK: '1' # Safe fallback for Apple/MPS environments
+  REQUESTS_CA_BUNDLE: ''          # Disable SSL verification for corporate proxies
+  CURL_CA_BUNDLE: ''              # Disable SSL verification for curl-based downloads
+  HF_HUB_OFFLINE: '0'             # Ensure HuggingFace can download models
+
+data_paths:
+  output_dir: outputs  # Used as default --output-dir

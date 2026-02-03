@@ -1,0 +1,28 @@
+# Core docling packages - essential for PDF extraction
+#Python 3.9+ (recommended 3.10+)
+docling==2.36.1
+docling-core==2.33.1
+
+# ML/AI packages - required for processing
+torch==2.7.0
+transformers==4.52.4
+
+# OCR packages - essential for image-based text extraction
+easyocr==1.7.2
+
+# Core dependencies
+pydantic==2.11.5
+PyYAML==6.0.2
+pathlib==1.0.1
+
+# Document processing
+PyMuPDF==1.26.3
+PyPDF2==3.0.1
+
+# Utilities
+tqdm==4.67.1
+psutil==7.0.0
+
+# Development and testing
+pytest==8.4.0
+pytest-asyncio==1.0.0

@@ -1,0 +1,33 @@
+flowchart TD
+    A[CLI Entry Point run_pipeline.py] --> B{Validate Arguments}
+    B -->|Invalid| FAIL1[Error: Directory not found]
+    B -->|Valid| C[Configure Logging]
+    
+    C --> D[Initialize ADI Processor]
+    D --> E[Scan PDF Directory]
+    E --> F{PDFs Found?}
+    
+    F -->|No| FAIL2[Exit: No PDFs]
+    F -->|Yes| G[Process Each PDF]
+    
+    G --> H[Load Config]
+    H --> I[ADI Extraction]
+    
+    I --> J[Extract Structure]
+    J --> K1[Generate Markdown]
+    J --> K2[Extract Tables]
+    J --> K3[Generate Metadata]
+    
+    K1 --> L[Save to Output Directory]
+    K2 --> L
+    K3 --> L
+    
+    L --> M{More PDFs?}
+    M -->|Yes| G
+    M -->|No| N[Complete Processing]
+    
+    N --> END[End: Pipeline Complete]
+    
+    %% Error handling path
+    J -->|Error| ERR[Log Error & Continue]
+    ERR --> M

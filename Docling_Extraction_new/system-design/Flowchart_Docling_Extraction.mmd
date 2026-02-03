@@ -1,0 +1,45 @@
+flowchart TD
+    A[CLI Entry Point<br/>run_pipeline.py] --> B{Validate Arguments}
+    B -->|Invalid| C[Error: Directory not found]
+    B -->|Valid| D[Configure Logging]
+    
+    D --> E[Initialize PDF Processor]
+    E --> F[Scan PDF Directory]
+    
+    F --> G{PDFs Found?}
+    G -->|No| H[Exit: No PDFs]
+    G -->|Yes| I[Process Each PDF]
+    
+    I --> J[Load Config]
+    J --> K[Docling Extraction]
+    
+    K --> L[Extract Structure]
+    L --> M[Generate Markdown]
+    L --> N[Extract Tables]
+    L --> O[Extract Images]
+    L --> P[Extract Coordinates]
+    
+    M --> Q[Save to Output Directory]
+    N --> Q
+    O --> Q
+    P --> Q
+    
+    Q --> R{More PDFs?}
+    R -->|Yes| I
+    R -->|No| S[Complete Processing]
+    
+    %% Error Handling
+    K -->|Error| T[Log Error & Continue]
+    T --> R
+    
+    %% Styling
+    classDef default fill:#f9f9f9,stroke:#333,stroke-width:1px,color:#000
+    classDef decision fill:#e8f4fd,stroke:#1976d2,stroke-width:2px,color:#000
+    classDef process fill:#f3f8f3,stroke:#388e3c,stroke-width:1px,color:#000
+    classDef output fill:#fff8e1,stroke:#f57c00,stroke-width:1px,color:#000
+    classDef error fill:#ffebee,stroke:#d32f2f,stroke-width:1px,color:#000
+    
+    class B,G,R decision
+    class E,I,J,K,L,S process
+    class M,N,O,P,Q output
+    class C,H,T error

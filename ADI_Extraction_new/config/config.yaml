@@ -1,0 +1,40 @@
+# Azure Document Intelligence Configuration
+azure:
+  api_model: "prebuilt-layout"
+  mode: "markdown"
+
+# File Paths Configuration
+paths:
+  input_folder: "C:\\Users\\JP782AS\\OneDrive - EY\\My Workspace\\GenericExtractionToolDocling\\ADI Extraction\\inputs"
+  output_folder: "C:\\Users\\JP782AS\\OneDrive - EY\\My Workspace\\GenericExtractionToolDocling\\ADI Extraction\\outputs"
+
+# Processing Settings
+processing:
+  # Output file names
+  combined_content_filename: "document.md"
+  metadata_filename: "metadata.json"
+  tables_folder_name: "tables"
+  images_folder_name: "images"
+  
+  # Table processing settings
+  save_individual_tables: true
+  table_filename_prefix: "table_"
+  table_images_folder_name: "table_images"
+  extract_table_images: true
+  
+  # Page image settings
+  extract_page_images: true
+  image_scale_factor: 2.0  # 2x scale for good quality (144 DPI vs 72 DPI standard)
+  image_format: "PNG"
+  
+  # Page numbering format
+  page_number_format: "<!-- page_number: page_{} -->"
+  
+# File encoding
+encoding: "utf-8"
+
+# Logging
+logging:
+  show_processing_messages: true
+  show_table_save_confirmations: true
+  show_error_details: true
